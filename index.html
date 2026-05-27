@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amit Mukherjee — Product</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0f0f0f;
+  --sidebar: #161616;
+  --surface: #1e1e1e;
+  --surface2: #242424;
+  --border: rgba(255,255,255,0.09);
+  --text: #eeebe5;
+  --sub: #c8c4bc;
+  --muted: #8a8680;
+  --accent: #c9a96e;
+  --green: #4dbe8a;
+  --green-dim: rgba(77,190,138,0.10);
+  --sidebar-w: 260px;
+}
+html, body { height: 100%; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+}
+
+/* ── SIDEBAR ── */
+.sidebar {
+  width: var(--sidebar-w);
+  min-height: 100vh;
+  background: var(--sidebar);
+  border-right: 0.5px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  z-index: 10;
+  padding: 2.5rem 1.75rem;
+}
+.sidebar-brand { margin-bottom: 3rem; }
+.sidebar-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.35rem;
+  color: var(--text);
+  line-height: 1.2;
+  margin-bottom: 0.35rem;
+}
+.sidebar-title {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+.sidebar-nav { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.85rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 13px;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+  border: none;
+  background: none;
+  text-align: left;
+  width: 100%;
+  position: relative;
+  font-family: 'DM Sans', sans-serif;
+}
+.nav-item:hover { color: var(--sub); background: rgba(255,255,255,0.04); }
+.nav-item.active { color: var(--text); background: rgba(201,169,110,0.08); }
+.nav-item.active::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 50%;
+  transform: translateY(-50%);
+  width: 2px; height: 16px;
+  background: var(--accent);
+  border-radius: 1px;
+}
+.nav-icon { font-size: 13px; width: 18px; text-align: center; opacity: 0.7; }
+.sidebar-footer { padding-top: 1.5rem; border-top: 0.5px solid var(--border); }
+.social-links { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.85rem; }
+.social-link {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  text-decoration: none;
+  padding: 4px 9px;
+  border: 0.5px solid var(--border);
+  border-radius: 2px;
+  transition: all 0.2s;
+}
+.social-link:hover { color: var(--accent); border-color: rgba(201,169,110,0.4); }
+.sidebar-available {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 11px;
+  color: var(--green);
+  font-family: 'DM Mono', monospace;
+  letter-spacing: 0.04em;
+}
+.dot-green {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  animation: blink 2s infinite;
+  flex-shrink: 0;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+/* ── MAIN ── */
+.main { margin-left: var(--sidebar-w); flex: 1; min-height: 100vh; position: relative; }
+.section {
+  display: none;
+  min-height: 100vh;
+  padding: 4rem;
+  animation: fadeUp 0.3s ease forwards;
+}
+.section.active { display: block; }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.section-inner { max-width: 700px; }
+
+/* ── TYPOGRAPHY ── */
+.eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+}
+h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 1.5rem;
+}
+h1 em { font-style: italic; color: var(--accent); }
+h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2rem;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 2rem;
+}
+h2 em { font-style: italic; color: var(--accent); }
+.body-text { font-size: 14px; color: var(--sub); line-height: 1.85; }
+.body-text + .body-text { margin-top: 0.9rem; }
+.body-text strong { color: var(--text); font-weight: 500; }
+
+/* ── ME ── */
+.me-top { display: grid; grid-template-columns: 1fr 110px; gap: 2.5rem; align-items: start; margin-bottom: 2.5rem; }
+.avatar-box {
+  width: 110px; height: 110px;
+  border-radius: 6px;
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2.5rem;
+  flex-shrink: 0;
+}
+.stat-row {
+  display: flex; gap: 2rem;
+  padding: 1.75rem 0;
+  border-top: 0.5px solid var(--border);
+  border-bottom: 0.5px solid var(--border);
+  margin-bottom: 2rem;
+}
+.stat-n {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.7rem;
+  color: var(--accent);
+  line-height: 1;
+}
+.stat-l { font-size: 11px; color: var(--muted); margin-top: 3px; }
+.highlight-box {
+  padding: 1.25rem 1.5rem;
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-left: 2px solid var(--accent);
+  border-radius: 0 4px 4px 0;
+  font-size: 13px;
+  color: var(--sub);
+  line-height: 1.75;
+}
+.highlight-box strong { color: var(--text); font-weight: 500; }
+
+/* ── PROJECTS ── */
+.project-card {
+  padding: 1.75rem 0;
+  border-bottom: 0.5px solid var(--border);
+}
+.project-card:first-child { border-top: 0.5px solid var(--border); }
+.project-top { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 0.5rem; }
+.project-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+  padding-top: 4px;
+  flex-shrink: 0;
+}
+.project-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.15rem;
+  color: var(--text);
+  flex: 1;
+  line-height: 1.3;
+}
+.badge-live {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  padding: 2px 8px;
+  border-radius: 20px;
+  background: var(--green-dim);
+  border: 0.5px solid rgba(77,190,138,0.25);
+  color: var(--green);
+  display: inline-flex; align-items: center; gap: 4px;
+  flex-shrink: 0; margin-top: 3px;
+}
+.badge-live::before {
+  content:''; width:5px; height:5px; border-radius:50%;
+  background:var(--green); animation: blink 2s infinite;
+}
+.project-desc { font-size: 13px; color: var(--sub); line-height: 1.75; margin: 0.5rem 0 0.85rem; }
+.tag-row { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.9rem; }
+.tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: 0.05em;
+  padding: 2px 8px;
+  background: rgba(255,255,255,0.04);
+  border: 0.5px solid var(--border);
+  border-radius: 2px; color: var(--muted);
+}
+.project-actions { display: flex; gap: 0.5rem; }
+.btn-primary {
+  font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.04em;
+  padding: 5px 14px; background: var(--accent); color: #0f0f0f;
+  border-radius: 2px; text-decoration: none; border: none; cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-primary:hover { background: #dbbe84; }
+.btn-ghost {
+  font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.04em;
+  padding: 5px 14px; background: transparent; color: var(--sub);
+  border-radius: 2px; text-decoration: none;
+  border: 0.5px solid var(--border); cursor: pointer; transition: all 0.2s;
+}
+.btn-ghost:hover { color: var(--text); border-color: rgba(255,255,255,0.2); }
+
+/* ── RESUME ── */
+.block-title {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 0.15em;
+  color: var(--accent); text-transform: uppercase;
+  padding-bottom: 0.75rem;
+  border-bottom: 0.5px solid var(--border);
+  margin-bottom: 0.25rem;
+}
+.resume-block { margin-bottom: 2.5rem; }
+.timeline-item {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 1.5rem;
+  padding: 1.2rem 0;
+  border-bottom: 0.5px solid var(--border);
+}
+.timeline-item:last-child { border-bottom: none; }
+.t-date {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; color: var(--muted);
+  letter-spacing: 0.04em; line-height: 1.6; padding-top: 2px;
+}
+.t-role { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 1px; }
+.t-company {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; color: var(--accent);
+  letter-spacing: 0.06em; margin-bottom: 0.6rem;
+}
+.t-bullets { list-style: none; display: flex; flex-direction: column; gap: 3px; }
+.t-bullets li {
+  font-size: 12px; color: var(--sub);
+  padding-left: 1rem; position: relative; line-height: 1.6;
+}
+.t-bullets li::before { content:'—'; position:absolute; left:0; color: var(--border); }
+.dl-btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  margin-top: 1.5rem;
+  font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.06em;
+  color: var(--text); background: var(--surface);
+  border: 0.5px solid var(--border);
+  padding: 0.6rem 1.2rem; border-radius: 3px;
+  text-decoration: none; transition: all 0.2s;
+}
+.dl-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ── SKILLS ── */
+.skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
+.skill-card {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: 4px;
+  padding: 1.25rem 1.4rem;
+}
+.skill-card-title {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 0.12em;
+  color: var(--accent); text-transform: uppercase; margin-bottom: 0.8rem;
+}
+.skill-list { display: flex; flex-direction: column; gap: 0.3rem; }
+.skill-list span { font-size: 13px; color: var(--sub); }
+.tools-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.tool-tag {
+  font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.04em;
+  padding: 4px 10px;
+  background: rgba(255,255,255,0.04);
+  border: 0.5px solid var(--border);
+  border-radius: 2px; color: var(--sub);
+}
+
+/* ── CONTACT ── */
+.contact-intro { font-size: 14px; color: var(--sub); max-width: 480px; line-height: 1.9; margin-bottom: 2.5rem; }
+.contact-intro strong { color: var(--text); }
+.contact-items { margin-bottom: 2.5rem; }
+.contact-row {
+  display: flex; align-items: center; gap: 1.5rem;
+  padding: 1rem 0;
+  border-bottom: 0.5px solid var(--border);
+  text-decoration: none; transition: all 0.2s;
+}
+.contact-row:first-child { border-top: 0.5px solid var(--border); }
+.contact-row:hover .c-value { color: var(--accent); }
+.c-label {
+  font-family: 'DM Mono', monospace; font-size: 10px;
+  letter-spacing: 0.1em; color: var(--muted); text-transform: uppercase;
+  width: 80px; flex-shrink: 0;
+}
+.c-value { font-size: 13px; color: var(--sub); transition: color 0.2s; flex: 1; }
+.c-arrow { color: var(--muted); font-size: 13px; }
+.status-box {
+  padding: 1.25rem 1.5rem;
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: 4px; max-width: 400px;
+}
+.status-box .eyebrow { margin-bottom: 0.4rem; }
+.status-box p { font-size: 13px; color: var(--sub); line-height: 1.8; }
+.status-box strong { color: var(--text); }
+
+/* ── MOBILE ── */
+.mob-header {
+  display: none; position: fixed;
+  top: 0; left: 0; right: 0; z-index: 20;
+  background: var(--sidebar);
+  border-bottom: 0.5px solid var(--border);
+  padding: 0.9rem 1.25rem;
+  align-items: center; justify-content: space-between;
+}
+.mob-name { font-family: 'DM Serif Display', serif; font-size: 1rem; color: var(--text); }
+.mob-nav {
+  display: none; position: fixed;
+  bottom: 0; left: 0; right: 0; z-index: 20;
+  background: var(--sidebar);
+  border-top: 0.5px solid var(--border);
+  padding: 0.4rem 0;
+  justify-content: space-around;
+}
+.mob-nav-item {
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  padding: 0.4rem 0.6rem; cursor: pointer;
+  border: none; background: none; color: var(--muted);
+  font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.06em;
+  transition: color 0.2s;
+}
+.mob-nav-item .icon { font-size: 15px; }
+.mob-nav-item.active { color: var(--accent); }
+
+@media (max-width: 768px) {
+  body { display: block; }
+  .sidebar { display: none; }
+  .mob-header { display: flex; }
+  .mob-nav { display: flex; }
+  .main { margin-left: 0; }
+  .section { padding: 1.5rem; padding-top: 4.5rem; padding-bottom: 5rem; min-height: auto; }
+  .me-top { grid-template-columns: 1fr; }
+  .avatar-box { display: none; }
+  .stat-row { gap: 1.25rem; flex-wrap: wrap; }
+  .skills-grid { grid-template-columns: 1fr; }
+  .timeline-item { grid-template-columns: 1fr; gap: 0.2rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-brand">
+    <div class="sidebar-name">Amit Mukherjee</div>
+    <div class="sidebar-title">Product · Mumbai</div>
+  </div>
+  <nav class="sidebar-nav">
+    <button class="nav-item active" data-section="me"><span class="nav-icon">◎</span>Me</button>
+    <button class="nav-item" data-section="projects"><span class="nav-icon">◈</span>Projects</button>
+    <button class="nav-item" data-section="resume"><span class="nav-icon">◻</span>Resume</button>
+    <button class="nav-item" data-section="skills"><span class="nav-icon">◇</span>Skills</button>
+    <button class="nav-item" data-section="contact"><span class="nav-icon">◌</span>Contact</button>
+  </nav>
+  <div class="sidebar-footer">
+    <div class="social-links">
+      <a class="social-link" href="https://linkedin.com/in/amit-mukherjee" target="_blank">LinkedIn</a>
+      <a class="social-link" href="mailto:ami007muk@gmail.com">Email</a>
+    </div>
+    <div class="sidebar-available"><div class="dot-green"></div>Available immediately</div>
+  </div>
+</aside>
+
+<!-- MOBILE -->
+<header class="mob-header">
+  <div class="mob-name">Amit Mukherjee</div>
+  <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);">PRODUCT</div>
+</header>
+<nav class="mob-nav">
+  <button class="mob-nav-item active" data-section="me"><span class="icon">◎</span>Me</button>
+  <button class="mob-nav-item" data-section="projects"><span class="icon">◈</span>Projects</button>
+  <button class="mob-nav-item" data-section="resume"><span class="icon">◻</span>Resume</button>
+  <button class="mob-nav-item" data-section="skills"><span class="icon">◇</span>Skills</button>
+  <button class="mob-nav-item" data-section="contact"><span class="icon">◌</span>Contact</button>
+</nav>
+
+<main class="main">
+
+  <!-- ME -->
+  <section class="section active" id="section-me">
+    <div class="section-inner">
+      <div class="me-top">
+        <div>
+          <div class="eyebrow">About me</div>
+          <h1>Building products<br>for <em>real people</em></h1>
+          <p class="body-text">
+            PM with a background in <strong>data science and enterprise operations</strong>. I started in analytics, spent time at Accenture and Amazon understanding how real users behave, and have been deep in product work ever since — writing PRDs, running teardowns, and building prototypes.
+          </p>
+          <p class="body-text">
+            I care about <strong>clear thinking over clean slides</strong>. Comfortable with ambiguity, fast to iterate, and interested in AI-native products that solve hard operational problems.
+          </p>
+        </div>
+        <div class="avatar-box">👤</div>
+      </div>
+      <div class="stat-row">
+        <div><div class="stat-n">3+</div><div class="stat-l">Yrs professional exp</div></div>
+        <div><div class="stat-n">3</div><div class="stat-l">PM projects</div></div>
+        <div><div class="stat-n">1</div><div class="stat-l">Live prototype</div></div>
+        <div><div class="stat-n">98%</div><div class="stat-l">CSAT @ Amazon</div></div>
+      </div>
+      <div class="highlight-box">
+        <strong>Looking for:</strong> PM internship or associate PM role at an early-stage company — ideally AI-native, India or Southeast Asia. <strong>Available immediately.</strong>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="section" id="section-projects">
+    <div class="section-inner">
+      <div class="eyebrow">Work</div>
+      <h2>Projects &<br><em>case studies</em></h2>
+
+      <div class="project-card">
+        <div class="project-top">
+          <div class="project-num">01</div>
+          <div class="project-name">Blinkfit — 30-Min Fitness Commerce</div>
+          <span class="badge-live">Live</span>
+        </div>
+        <p class="project-desc">End-to-end product design for a quick-commerce platform for fitness products. Defined the problem, designed dual user flows for beginners and experts, and built a working prototype with a quiz-based recommendation engine, product discovery, and a deals screen.</p>
+        <div class="tag-row">
+          <span class="tag">Product Strategy</span><span class="tag">UX Design</span>
+          <span class="tag">Prototype</span><span class="tag">Quick Commerce</span><span class="tag">Lovable</span>
+        </div>
+        <div class="project-actions">
+          <a class="btn-primary" href="https://blinkfit-fuel-fast.lovable.app" target="_blank">View Prototype ↗</a>
+          <a class="btn-ghost" href="[ADD MEDIUM CASE STUDY LINK]" target="_blank">Case Study ↗</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-top">
+          <div class="project-num">02</div>
+          <div class="project-name">KOO — Indian Social Media Revival</div>
+        </div>
+        <p class="project-desc">Full product strategy for reviving Koo. Covered competitive analysis across 8 platforms, 4 user personas, RICE-prioritized feature roadmap, full PRD, and a phased plan targeting 50M MAUs. Published on Medium.</p>
+        <div class="tag-row">
+          <span class="tag">Product Strategy</span><span class="tag">PRD</span>
+          <span class="tag">User Research</span><span class="tag">RICE</span><span class="tag">Roadmap</span>
+        </div>
+        <div class="project-actions">
+          <a class="btn-ghost" href="[ADD MEDIUM LINK]" target="_blank">Read Case Study ↗</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-top">
+          <div class="project-num">03</div>
+          <div class="project-name">Swiggy Instamart — Product Teardown</div>
+        </div>
+        <p class="project-desc">Deep teardown covering onboarding analysis, 4 user personas, north star + L1/L2 metrics, and 4 RICE-prioritized feature proposals to improve AOV and repeat purchase rate. Published on Medium.</p>
+        <div class="tag-row">
+          <span class="tag">Teardown</span><span class="tag">UX Analysis</span>
+          <span class="tag">Metrics</span><span class="tag">RICE</span>
+        </div>
+        <div class="project-actions">
+          <a class="btn-ghost" href="[ADD MEDIUM LINK]" target="_blank">Read Teardown ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESUME -->
+  <section class="section" id="section-resume">
+    <div class="section-inner">
+      <div class="eyebrow">Experience</div>
+      <h2>Where I've<br><em>worked</em></h2>
+
+      <div class="resume-block">
+        <div class="block-title">Experience</div>
+        <div class="timeline-item">
+          <div class="t-date">Jun '25 – Oct '25</div>
+          <div>
+            <div class="t-role">Product Management Intern</div>
+            <div class="t-company">ESCROW STACK · Bengaluru</div>
+            <ul class="t-bullets">
+              <li>Translated requirements into user stories, acceptance criteria, and test scenarios</li>
+              <li>Owned PRD validation and feature readiness before release</li>
+              <li>Ran sprint planning, standups, and backlog refinement — reduced rework cycles</li>
+              <li>Tracked feature progress across concurrent initiatives in Jira</li>
+            </ul>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="t-date">Jun '24 – Jun '25</div>
+          <div>
+            <div class="t-role">SPS Associate</div>
+            <div class="t-company">AMAZON · Remote</div>
+            <ul class="t-bullets">
+              <li>Resolved 30–40 seller queries/day — 98% satisfaction, 95% SLA adherence</li>
+              <li>Synthesized behavioral feedback to surface recurring product gaps</li>
+            </ul>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="t-date">Jun '21 – Feb '23</div>
+          <div>
+            <div class="t-role">Content Operations Analyst</div>
+            <div class="t-company">ACCENTURE</div>
+            <ul class="t-bullets">
+              <li>Managed content review workflows on Meta's platform at scale</li>
+              <li>Maintained quality and SLA targets across high-volume operations</li>
+              <li>Identified process gaps and proposed workflow improvements</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="resume-block">
+        <div class="block-title">Education</div>
+        <div class="timeline-item">
+          <div class="t-date">Sep '24 – Jan '25</div>
+          <div>
+            <div class="t-role">Product Management Program</div>
+            <div class="t-company">GROWTHSCHOOL · Certification</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="t-date">Jul '22 – Aug '23</div>
+          <div>
+            <div class="t-role">PG Diploma in Data Science</div>
+            <div class="t-company">IIIT BANGALORE</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="t-date">Jun '16 – May '19</div>
+          <div>
+            <div class="t-role">BSc. Information Technology</div>
+            <div class="t-company">MUMBAI UNIVERSITY</div>
+          </div>
+        </div>
+      </div>
+
+      <a class="dl-btn" href="[ADD RESUME GOOGLE DRIVE LINK]" target="_blank">↓ Download Resume</a>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="section" id="section-skills">
+    <div class="section-inner">
+      <div class="eyebrow">Toolkit</div>
+      <h2>What I<br><em>work with</em></h2>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <div class="skill-card-title">Product</div>
+          <div class="skill-list">
+            <span>PRD writing</span>
+            <span>User research</span>
+            <span>A/B testing</span>
+            <span>Roadmapping</span>
+            <span>RICE prioritization</span>
+            <span>Feature teardowns</span>
+            <span>North Star metrics</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-card-title">Analytics</div>
+          <div class="skill-list">
+            <span>SQL</span>
+            <span>Python</span>
+            <span>Power BI</span>
+            <span>MS Excel (Advanced)</span>
+            <span>L1 / L2 metrics</span>
+            <span>Data-driven decisions</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-card-title">Design & Prototyping</div>
+          <div class="skill-list">
+            <span>Figma</span>
+            <span>Balsamiq</span>
+            <span>Lovable (AI prototyping)</span>
+            <span>User flow mapping</span>
+            <span>Wireframing</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-card-title">AI Tools</div>
+          <div class="skill-list">
+            <span>Claude (Anthropic)</span>
+            <span>ChatGPT</span>
+            <span>Lovable</span>
+            <span>Gamma (AI decks)</span>
+            <span>Perplexity</span>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:1.5rem;">
+        <div class="block-title" style="margin-bottom:1rem;">All tools</div>
+        <div class="tools-grid">
+          <span class="tool-tag">SQL</span><span class="tool-tag">Python</span>
+          <span class="tool-tag">Figma</span><span class="tool-tag">Jira</span>
+          <span class="tool-tag">Power BI</span><span class="tool-tag">Balsamiq</span>
+          <span class="tool-tag">MS Excel</span><span class="tool-tag">Lovable</span>
+          <span class="tool-tag">Claude</span><span class="tool-tag">ChatGPT</span>
+          <span class="tool-tag">Gamma</span><span class="tool-tag">Perplexity</span>
+          <span class="tool-tag">Notion</span><span class="tool-tag">Vercel</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section" id="section-contact">
+    <div class="section-inner">
+      <div class="eyebrow">Get in touch</div>
+      <h2>Let's talk<br><em>product</em></h2>
+      <p class="contact-intro">
+        Open to <strong>PM internships</strong> and <strong>associate PM roles</strong> at early-stage, AI-native companies. India, Southeast Asia, or remote.
+      </p>
+      <div class="contact-items">
+        <a class="contact-row" href="mailto:ami007muk@gmail.com">
+          <span class="c-label">Email</span>
+          <span class="c-value">ami007muk@gmail.com</span>
+          <span class="c-arrow">↗</span>
+        </a>
+        <a class="contact-row" href="tel:+917798324288">
+          <span class="c-label">Phone</span>
+          <span class="c-value">+91 7798324288</span>
+          <span class="c-arrow">↗</span>
+        </a>
+        <a class="contact-row" href="https://linkedin.com/in/amit-mukherjee" target="_blank">
+          <span class="c-label">LinkedIn</span>
+          <span class="c-value">linkedin.com/in/amit-mukherjee</span>
+          <span class="c-arrow">↗</span>
+        </a>
+        <a class="contact-row" href="[ADD MEDIUM PROFILE LINK]" target="_blank">
+          <span class="c-label">Medium</span>
+          <span class="c-value">Case studies & writing</span>
+          <span class="c-arrow">↗</span>
+        </a>
+      </div>
+      <div class="status-box">
+        <div class="eyebrow">Status</div>
+        <p>Based in <strong>Mumbai, India</strong>. <strong>Available immediately</strong> — can start within a week.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  function navigate(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.getElementById('section-' + id).classList.add('active');
+    document.querySelectorAll('[data-section]').forEach(n => {
+      n.classList.toggle('active', n.dataset.section === id);
+    });
+    window.scrollTo(0, 0);
+  }
+  document.querySelectorAll('[data-section]').forEach(btn => {
+    btn.addEventListener('click', () => navigate(btn.dataset.section));
+  });
+</script>
+</body>
+</html>
